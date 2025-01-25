@@ -1,0 +1,845 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    background-color: #e6f2ff;
+    font-family: 'Poppins', sans-serif;
+}
+
+nav .logo {
+    display: flex;
+    align-items: center;
+}
+
+nav .logo-image {
+    width: 45px;
+    height: 150px;
+}
+
+nav .logo-image img {
+    width: auto;
+    height: 200px;
+    object-fit: cover;
+    padding-left: 18px;
+    margin-top: 10px;
+}
+
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 250px;
+    background-image: url('../photo/back/pexel4.jpg'); 
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; /* no tiling */
+    padding: 10px 0 10px 10px;
+}
+
+
+nav .menu-items {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 40px);
+    justify-content: space-between;
+}
+
+nav .menu-items li {
+    list-style: none;
+}
+
+nav .menu-items li a {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    text-decoration: none;
+}
+
+
+
+nav .menu-items li.active a {
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    position: relative;
+}
+
+nav .menu-items li a ion-icon {
+    color: white;
+    font-size: 24px;
+    min-width: 45px;
+}
+
+nav .menu-items li a .links {
+    font-size: 18px;
+    color: white;
+}
+
+nav .menu-items li.active a {
+    background-color: #e6f2ff;
+}
+
+nav .menu-items li.active a:before {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    right: 0;
+    top: -40px;
+    border-radius: 50%;
+    box-shadow: 20px 20px #e6f2ff;
+    pointer-events: none;
+}
+
+nav .menu-items li.active a:after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    right: 0;
+    bottom: -40px;
+    border-radius: 50%;
+    box-shadow: 20px -20px #e6f2ff;
+    pointer-events: none;
+}
+
+
+nav .menu-items li.active a .links {
+    color: #1891d1;
+}
+
+nav .menu-items li.active a ion-icon {
+    color: #1891d1;
+}
+
+.dashboard {
+    position: relative;
+    left: 250px;
+    width: calc(100% - 250px);
+    min-height: 100vh;
+    background-color: #e6f2ff;
+    padding: 0px 15px;
+}
+
+
+.container {
+    padding-left: 10px;
+}
+
+.container .title {
+    display: flex;
+    align-items: center;
+    margin: 60px 0 30px;
+}
+
+.container .title ion-icon {
+    width: 35px;
+    height: 35px;
+    padding: 5px;
+    background-color: #1d64c2;
+    color: White;
+    border-radius: 6px;
+}
+
+.container .title .text {
+    font-size: 24px;
+    font-weight: 500;
+    color: #002960;
+    margin-left: 10px;
+}
+
+.container .boxes {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: none;
+}
+
+.container .boxes .box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: calc(100%/4 - 15px);
+    padding: 15px 20px;
+    border-radius: 10px;
+    background-color: #9cdef5;
+}
+
+.boxes .box ion-icon {
+    font-size: 35px;
+    color: black;
+    margin: 5px;
+}
+
+.boxes .box .text {
+    font-size: 18px;
+    font-weight: 500;
+    color: black;
+}
+
+.boxes .box .number {
+    font-size: 40px;
+    font-weight: 500;
+    color: black;
+}
+
+.boxes .box.box1 {
+    background-color: #ffd39a;
+}
+
+.boxes .box.box2 {
+    background-color: #c1d5a4;
+}
+
+.boxes .box.box3 {
+    background-color: #E2D9FF;
+}
+
+.boxes .box.box4 {
+    background-color: #99BEBC;
+}
+
+.container .table-design{
+padding: 0px 20px 40px 70px;
+}
+
+.container .activity {
+    width: 90%;
+    font-size: 18px;
+    color: #333;
+    margin-top: 20px;
+}
+
+.container .activity thead tr th{
+    text-align: left;
+    padding-bottom: 20px;
+    font-size: 20px;
+}
+
+.container .activity tbody tr td{
+    color: #333;
+    white-space: nowrap;
+    padding: 4px;
+}
+
+.container .activity tbody tr td a.delete-btn{
+    color: #000;
+    text-decoration: none;
+}
+
+.container .activity tbody tr.odd{
+    background-color: #ceecf6;
+
+}
+
+
+/* Add user */
+.addUser {
+    font-family: Helvetica, Arial, sans-serif;
+    margin: 10px 0% 50px;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.addUser-field input[type="text"],
+.addUser-field input[type="email"],
+.addUser-field input[type="date"],
+.addUser-field input[type="tel"],
+.addUser-field textarea,
+.addUser-field input[type="password"],
+.editForm input[type="text"],
+.editForm select{
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    width: 80%;
+    font-size: 16px;
+}
+.addUser-field input[type="radio"]{
+    margin-top: 11px;
+    margin-left: 10px;
+}
+
+.addUser-field label {
+    display: inline-block;
+    margin-left: 5px;
+    color: rgb(79, 79, 79);
+    font-size: 16px;
+}
+
+.addUser fieldset {
+    border-radius: 10px;
+    padding: 20px 40px 20px 40px;
+}
+
+.addUser-field input[type="submit"]{
+    width: 300px;
+    padding: 10px;
+    background-color: #1d64c2;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.editForm input[type="submit"]{
+    width: 300px;
+    padding: 10px;
+    background-color: #1d64c2;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.addUser .inline-input{
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.addUser .inline-input .inputs{
+    margin-left: 5%;
+    width: 50%;
+}
+
+.addUser-field input[type="checkbox"]{
+    margin: 12px 0px 12px 10%;
+}
+
+.addUser .Address{
+    width: 107.5%;
+    margin: 0px 5% 10px;
+}
+
+.addUser span{
+    font-family: Helvetica, Arial, sans-serif;
+    padding: 20px 0px 30px;
+
+}
+
+
+/* ============================== Handleing the yes or no buttons for logout  ==============================*/
+.data-table.logoutTable button {
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.data-table.logoutTable button#cancelLogout {
+    background-color: #4caf50;
+}
+
+.data-table.logoutTable button:hover {
+    opacity: 0.8;
+}
+
+/*=================================================*/
+
+
+
+/* =============================  Style for the Add Content area  =======================================*/
+.data-table.userDetailsTable {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+/* Title section */
+.data-table .title {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.data-table .title ion-icon {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.data-table .title .text {
+    font-size: 20px;
+}
+
+/* Form styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+input[type="text"],
+textarea,
+input[type="file"] {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input[type="file"] {
+    padding: 8px;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+/* Submit button */
+button {
+    padding: 12px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .data-table.userDetailsTable {
+        padding: 15px;
+    }
+
+    form {
+        gap: 15px;
+    }
+
+    label {
+        font-size: 12px;
+    }
+
+    input[type="text"],
+    textarea,
+    input[type="file"] {
+        font-size: 12px;
+    }
+
+    button {
+        font-size: 14px;
+    }
+}
+/*===========================================================*/
+
+/* =====================  Cards in Favorites  =======================*/
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 70px;
+    list-style-type: none;
+    padding: 0;
+}
+
+.card {
+    width: 150px;
+    height: 200px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-size: cover;
+    background-position: center;
+    transition: background-color 1s ease;
+    cursor: pointer;
+	transition: filter 2s ease;
+	color: red;
+}
+
+.card[data-status="deactive"] {
+    background-color: rgba(0, 0, 0, 0.5); /* Darken the background */
+    filter: grayscale(100%);/* ===========================================  GRAY SCALE \[T]/ */
+}
+
+.card-content h3 {
+    text-align: center;
+    font-size: 16px;
+    margin: 0;
+    color: white;
+    font-weight: bold;
+    z-index: 2; /* Ensure the text is above the image */
+}
+
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card[data-status="active"]:hover {
+    background-color: rgba(0, 0, 0, 0.3); 
+}
+
+
+
+
+/*===========================================================*/
+
+
+/*====================   profile editing    ======================*/
+
+
+.profileTable .field input[readonly] {
+    border: none; 
+    background-color: transparent; 
+    color: #444; 
+    font-size: 16px; 
+    padding: 0; 
+    cursor: default; 
+}
+
+.profileTable .field input:not([readonly]) {
+    border: 1px solid #aaa; 
+    background-color: #fff; 
+    color: #333; 
+    font-size: 16px;
+    padding: 5px 10px; 
+    border-radius: 4px; 
+    transition: all 0.2s ease-in-out; /* Smooth transition */
+}
+
+.profileTable .field input:not([readonly]):focus {
+    border: 1px solid #007BFF; /* Blue border */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
+    outline: none; /* Remove default outline */
+}
+
+
+
+
+
+
+
+.profileTable .field {
+    display: inline-flex; 
+    align-items: center;  
+    margin-bottom: 10px;  
+}
+
+.profileTable .field label {
+    margin-right: 10px;   
+    width: 100px;         
+}
+
+.profileTable .field input {
+    font-size: 16px;
+    padding: 5px 10px;   
+    border: 1px solid #aaa;
+    border-radius: 4px;  
+    margin-right: 10px;  
+}
+
+
+.profileTable .field button {
+    padding: 5px 12px;
+    background-color: #007BFF; 
+    color: white; 
+    border: none; 
+    border-radius: 4px; 
+    font-size: 14px; 
+    cursor: pointer; 
+    transition: background-color 0.2s ease-in-out; 
+    margin-left: 5px;
+	
+}
+
+.profileTable .field button:hover {
+    background-color: #0056b3; 
+}
+
+.profileTable .field button:disabled {
+    background-color: #ccc; 
+    color: #888; 
+    cursor: not-allowed; 
+}
+
+.profileTable img {
+    max-width: 150px; 
+    height: auto;
+    border-radius: 8px; 
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+}
+
+
+.profileTable .field input[type="file"] {
+    padding: 0;
+    font-size: 14px;
+}
+
+
+
+
+
+.profileTable .save-container {
+    text-align: center; 
+    margin-top: 20px; 
+}
+
+
+.profileTable .save-btn {
+    background: linear-gradient(45deg, #4CAF50, #45a049); 
+    color: #fff; 
+    padding: 12px 24px; 
+    font-size: 18px; 
+    font-weight: bold; 
+    border: none; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    transition: all 0.3s ease; 
+}
+
+
+.profileTable .save-btn:hover {
+    background: linear-gradient(45deg, #45a049, #388E3C);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); 
+}
+
+.profileTable .save-btn:active {
+    background: linear-gradient(45deg, #388E3C, #2E7D32);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); 
+    transform: translateY(2px);
+}
+
+
+.profileTable .save-btn:disabled {
+    background: #ccc; 
+    color: #888; 
+    cursor: not-allowed; 
+    box-shadow: none;
+    transform: none;
+}
+
+
+/*===========================================================*/
+
+
+/*====================   news in dashboarrd    ======================*/
+
+/*========= Toggle button */
+.toggle-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.toggle-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    color: white;
+    background-color: #4CAF50; /* Default state: Green */
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.toggle-btn.removing {
+    background-color: #f44336; /* Red for "Removing News" state */
+}
+
+.toggle-btn:hover {
+    transform: scale(1.05);
+}
+/*========= */
+
+
+
+
+.recent-activities {
+    padding: 2rem 0;
+    background-color: #f9f9f9;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    position: relative;
+}
+
+.news-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, z-index 0.3s ease, width 0.3s ease, height 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.news-card:hover {
+    transform: scale(1.02);
+}
+
+body:has(.news-card:focus-within) {
+    overflow: hidden;
+}
+
+.news-card:focus-within {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    right: 1rem;
+    margin: 0 auto;
+    z-index: 10;
+    transform: none;
+    width: auto;
+    max-width: 90%;
+    height: auto;
+    max-height: 90vh;
+    overflow: auto;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background: #fff;
+}
+
+.news-card:focus-within::-webkit-scrollbar {
+    display: none;
+}
+
+.news-card:focus-within {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.news-image {
+    width: 100%;
+    height: 200px;
+    display: block;
+}
+
+.news-card:focus-within .news-image {
+    height: auto;
+    object-fit: contain;
+}
+
+.news-title {
+    font-size: 1.5rem;
+    margin: 1rem;
+    color: #222;
+}
+
+.news-body {
+    font-size: 1rem;
+    color: #555;
+    margin: 0 1rem 1rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+}
+
+.news-card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+	
+	text-align: left;
+}
+
+.news-card:hover .news-body {
+    max-height: 50px;
+    opacity: 1;
+}
+
+.news-card:focus-within .news-body {
+    max-height: none;
+    opacity: 1;
+    overflow: visible;
+}
+
+.news-footer {
+    display: flex;
+	/*flex-direction: column;*//*  No auther, no column to column(mesl khar harf mizanam, agar soton be soton konim dokmeh ha zesht mishan) =========================  remove to make to auther date view normall  =========================*/
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #888;
+    margin: 0 1rem 1rem;
+}
+
+.news-grid:has(.news-card:focus-within) .news-card:not(:focus-within) {
+    filter: blur(5px);
+    pointer-events: none;
+}
+
+
+.accept-btn,
+.deny-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.accept-btn {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+.deny-btn {
+    background-color: #f44336; /* Red */
+    color: white;
+}
+
+/*===========================================================*/

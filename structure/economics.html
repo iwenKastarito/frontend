@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>economics Page</title>
+    <link rel="stylesheet" href="../style/economics.css">
+    <script>
+        const heroImages = [
+            '../photo/back/economy2.jpg',
+            '../photo/back/economy3.jpg'  
+        ];
+
+        function changeHeroImage() {
+            let randomIndex = Math.floor(Math.random() * heroImages.length);
+            let heroSection = document.querySelector('.hero');
+            heroSection.style.backgroundImage = `url('${heroImages[randomIndex]}')`;
+        }
+
+        setInterval(changeHeroImage, 10000);
+
+        window.addEventListener('load', changeHeroImage);
+
+        window.addEventListener('scroll', function () {
+            let heroSection = document.querySelector('.hero');
+            let scrollPosition = window.scrollY;
+
+            let newHeight = Math.max(50, 100 - scrollPosition / 5); 
+            heroSection.style.height = newHeight + "vh"; 
+
+            
+            let heroText = document.querySelector('.hero h2');
+            let heroDesc = document.querySelector('.hero p');
+
+            if (newHeight < 70) {
+                heroText.style.fontSize = '2rem'; 
+                heroDesc.style.fontSize = '1rem'; 
+            } else {
+                heroText.style.fontSize = '3rem'; 
+                heroDesc.style.fontSize = '1.5rem';
+            }
+        });
+        async function loadNews() {
+            try {
+                const response = await fetch('http://localhost:8080/news/byCategory?c=Economics');
+                const newsData = await response.json(); 
+
+                const newsGrid = document.querySelector('.news-grid');
+                newsGrid.innerHTML = ''; 
+
+                newsData.forEach(news => {
+                    const newsCard = document.createElement('div');
+                    newsCard.classList.add('news-card');
+                    newsCard.setAttribute('tabindex', '0');
+
+                    newsCard.innerHTML = `
+                        <img src="${news.photoPath}" class="news-image" alt="News Image">
+                        <h3 class="news-title">${news.title}</h3>
+                        <p class="news-body">${news.content}</p>
+                        <div class="news-footer">
+                            <span>
+                                <img src="../photo/logo/userWhite.png" alt="Author Icon" style="width: 20px; height: 20px; margin-right: 8px;">
+                                ${news.author}
+                            </span>
+                            <span>
+                                <img src="../photo/logo/dateNormal.png" alt="Date Icon" style="width: 20px; height: 20px; margin-right: 8px;">
+                                ${news.date}
+                            </span>
+                            <span>
+                                <img src="../photo/logo/eyeWhite.png" alt="Views Icon" style="width: 20px; height: 20px; margin-right: 8px;">
+                                ${news.viewNumber}
+                            </span>
+                        </div>
+                    `;
+
+                    newsGrid.appendChild(newsCard);
+                });
+            } catch (error) {
+                console.error('Error fetching news:', error);
+            }
+        }
+
+        // Call the function to load the news when the page loads
+        window.onload = loadNews;
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		// URLs for fetching data
+		const urls = {
+			posts: "http://localhost:8080/news/newsByCategory?c=Economics",
+			users: "http://localhost:8080/home/allUsers",
+			visits: "http://localhost:8080/news/viewsByCategory?c=Economics"
+		};
+
+		// Update stats dynamically
+		async function updateStats() {
+			try {
+				// Fetch and update post count
+				const postResponse = await fetch(urls.posts);
+				const postCount = await postResponse.text();
+				document.getElementById("post-count").textContent = `+${postCount}`;
+
+				// Fetch and update user count
+				const userResponse = await fetch(urls.users);
+				const userCount = await userResponse.text();
+				document.getElementById("user-count").textContent = `+${userCount}`;
+
+				// Fetch and update visit count
+				const visitResponse = await fetch(urls.visits);
+				const visitCount = await visitResponse.text();
+				document.getElementById("visit-count").textContent = `+${visitCount}`;
+			} catch (error) {
+				console.error("Error fetching stats:", error);
+			}
+		}
+
+		// Call the update function on page load
+		document.addEventListener("DOMContentLoaded", updateStats);
+		
+		
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">
+                <span class="logo-text">Bingo</span>
+            </a>
+
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#footer">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="authstyles.html">User Account</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+	<section id="home" class="hero">
+		<div class="container">
+			<h2>Above the Wings of Whales</h2>
+			<p style="margin-bottom: 60px;">Where stories take flight, carrying you beyond the surface into the depths of truth</p>
+
+			<div class="stats" style="display: flex; justify-content: center; align-items: center; gap: 150px; margin-top: 20px;">
+				<div class="stat-item" style="text-align: center;">
+					<img id="post-img" src="../photo/logo/postWhite.png" alt="Post logo" style="width: 80px; height: 80px; margin-bottom: 10px; filter: brightness(0) invert(1);">
+					<h3 id="post-count" style="margin: 0; color: white;">Loading...</h3>
+				</div>
+				<div class="stat-item" style="text-align: center;">
+					<img id="user-img" src="../photo/logo/userWhite.png" alt="Reporter logo" style="width: 80px; height: 80px; margin-bottom: 10px; filter: brightness(0) invert(1);">
+					<h3 id="user-count" style="margin: 0; color: white;">Loading...</h3>
+				</div>
+				<div class="stat-item" style="text-align: center;">
+					<img id="visit-img" src="../photo/logo/eyeWhite.png" alt="View logo" style="width: 80px; height: 80px; margin-bottom: 10px; filter: brightness(0) invert(1);">
+					<h3 id="visit-count" style="margin: 0; color: white;">Loading...</h3>
+				</div>
+			</div>
+			
+		</div>
+	</section>
+
+    <section id="Favservices" class="Favservices">
+        <div class="container">
+            <h2 class="section-title">Handpicked for you</h2>
+            <div class="news-grid">
+                <!-- News cards -->
+            </div>
+        </div>
+    </section>
+
+
+
+    <footer id="footer">
+        <div class="container">
+            <p> Made by Kasra and Alireza 🐳</p>
+        </div>
+    </footer>
+</body>
+</html>

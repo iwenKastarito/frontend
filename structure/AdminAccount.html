@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/AdminAccount.css">
+    <title>Admin Dashboard</title>
+</head>
+
+<body>
+    
+    <nav>
+		<!-- logo,    if useing this change this in css => nav .menu-items   -->
+		
+		<!--
+         <div class="logo">
+            <div class="logo-image">
+                <img src="../photo/logo/logo.png" alt="">
+            </div>
+        </div>
+		-->
+		<!--==================================================================-->
+		
+        <div class="menu-items">
+            <ul class="navLinks">
+                <li class="navList active">
+                    <a href="#">
+                        <ion-icon name="home-outline"></ion-icon>
+                        <span class="links">Dashboard</span>
+                    </a>
+                </li>
+                <li class="navList">
+                    <a href="#">
+                        <ion-icon name="folder-outline"></ion-icon>
+                        <span class="links">Add Content</span>
+                    </a>
+                </li>
+                
+                <li class="navList">
+                    <a href="#">
+                        <ion-icon name="heart-outline"></ion-icon>
+                        <span class="links">Favorites</span>
+                    </a>
+                </li>
+                
+            </ul>
+            <ul class="bottom-link">
+                <li>
+                    <a href="#">
+                        <ion-icon name="person-circle-outline"></ion-icon>
+                        <span class="links">Profile</span>
+                    </a>
+                </li>
+                <li>
+					<a href="#" onclick="confirmLogout()">
+						<ion-icon name="log-out-outline"></ion-icon>
+						<span class="links">Logout</span>
+					</a>
+				</li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <section class="dashboard">
+        <div class="container">
+            <div class="overview">
+                <div class="title">
+                    <ion-icon name="speedometer"></ion-icon>
+                    <span class="text">Admin Dashboard</span>
+                </div>
+                <div class="boxes">
+                    <div class="box box1">
+                        <ion-icon name="eye-outline"></ion-icon>
+                        <span class="text">Total Views</span>
+                        <span class="number" id="totalViews">Loading...</span>
+                    </div>
+                    <div class="box box2">
+                        <ion-icon name="people-outline"></ion-icon>
+                        <span class="text">Active users</span>
+                        <span class="number">1</span>
+                    </div>
+                    <div class="box box3">
+                        <ion-icon name="chatbubbles-outline"></ion-icon>
+                        <span class="text">Total Posts</span>
+                        <span class="number" id="totalPost">Loading...</span>
+                    </div>
+                    <div class="box box4">
+                        <ion-icon name="future-outline"></ion-icon>
+                        <span class="text">Coming soon</span>
+                        <span class="number">:)</span>
+                    </div>
+                </div> 
+            </div>
+            
+
+			
+            <!-- Recent Activities -->
+            <div style="display:none" class="data-table dashboardTable">
+				<div class="toggle-container">
+					<button id="toggleButton" class="toggle-btn" data-state="approval">Pending Approval</button>
+				</div>
+				<div class="container">
+					<h2 class="section-title"> </h2><!-- just for space -->
+					<div class="news-grid">
+						<div class="news-card" tabindex="0">
+							<img src="../photo/news/sports/ID1.jpeg" class="news-image" alt="News Image">
+							<h3 class="news-title">News Title</h3>
+							<p class="news-body">O’er all the hilltops...</p>
+							<div class="news-footer">
+								<button class="accept-btn">Accept</button>
+								<button class="deny-btn">Deny</button>
+							</div>
+						</div>
+
+						<div class="news-card" tabindex="0">
+							<img src="../photo/news/sports/ID2.jpg" class="news-image" alt="News Image">
+							<h3 class="news-title">Second title</h3>
+							<p class="news-body">Sed do eiusmod tempor...</p>
+							<div class="news-footer">
+								<button class="accept-btn">Accept</button>
+								<button class="deny-btn">Deny</button>
+							</div>
+						</div>
+						<div class="news-card" tabindex="0">
+							<img src="../photo/news/sports/ID3.jpeg" class="news-image" alt="News Image">
+							<h3 class="news-title">Second title</h3>
+							<p class="news-body">Sed do eiusmod tempor...</p>
+							<div class="news-footer">
+								<button class="accept-btn">Accept</button>
+								<button class="deny-btn">Deny</button>
+							</div>
+						</div>
+						<div class="news-card" tabindex="0">
+							<img src="../photo/news/sports/ID4.jpg" class="news-image" alt="News Image">
+							<h3 class="news-title">Second title</h3>
+							<p class="news-body">Sed do eiusmod tempor...</p>
+							<div class="news-footer">
+								<button class="accept-btn">Accept</button>
+								<button class="deny-btn">Deny</button>
+							</div>
+						</div>
+						<div class="news-card" tabindex="0">
+							<img src="../photo/news/sports/ID5.webp" class="news-image" alt="News Image">
+							<h3 class="news-title">Second title</h3>
+							<p class="news-body">Sed do eiusmod tempor...</p>
+							<div class="news-footer">
+								<button class="accept-btn">Accept</button>
+								<button class="deny-btn">Deny</button>
+							</div>
+						</div>
+
+						
+					</div>
+				</div>
+			</div>
+
+            
+            <!-- Content -->
+			<div style="display:none" class="data-table userDetailsTable">
+				<div class="title">
+					<ion-icon name="folder-outline"></ion-icon>
+					<span class="text">Content</span>
+				</div>
+				<div>
+					<!-- Form to add file -->
+					<form id="fileForm">
+						<div class="form-group">
+							<label for="fileTitle">Title</label>
+							<input type="text" id="fileTitle" name="fileTitle" placeholder="Enter file title" class="form-control">
+						</div>
+
+						<div class="form-group">
+							<label for="fileBody">Body Text</label>
+							<textarea id="fileBody" name="fileBody" placeholder="Enter body text" class="form-control"></textarea>
+						</div>
+
+						<div class="form-group">
+							<label for="fileImage">Choose a Picture</label>
+							<input type="file" id="fileImage" name="fileImage" accept="image/*" class="form-control">
+						</div>
+
+						<div class="form-group">
+							<button type="submit" class="btn btn-primary">Add File</button>
+						</div>
+					</form>
+				</div>
+			</div>
+
+
+            
+
+            <!--  Likes -->
+			<div style="display:none" class="data-table VehicleDetails">
+				<div class="title">
+					<ion-icon name="heart-outline"></ion-icon>
+					<span class="text">Favorite Tags</span>
+				</div>
+				<div>
+					<h2>Your Favorite Tags</h2>
+					<ul class="cards-container">
+						<li class="card" data-name="economic" style="background-image: url('../photo/back/economy2.jpg'); filter: grayscale(100%);">
+							<div class="card-content">
+								<h3>Economics</h3>
+							</div>
+						</li>
+						<li class="card" data-name="health" style="background-image: url('../photo/back/health3.jpg'); filter: grayscale(100%);">
+							<div class="card-content">
+								<h3>Health</h3>
+							</div>
+						</li>
+						<li class="card" data-name="politics" style="background-image: url('../photo/back/political4.jpg'); filter: grayscale(100%);">
+							<div class="card-content">
+								<h3>Politics</h3>
+							</div>
+						</li>
+						<li class="card" data-name="sports" style="background-image: url('../photo/back/sportback1.jpg'); filter: grayscale(100%);">
+							<div class="card-content">
+								<h3>Sports</h3>
+							</div>
+						</li>
+						<li class="card" data-name="technology" style="background-image: url('../photo/back/technological1.jpg'); filter: grayscale(100%);">
+							<div class="card-content">
+								<h3>Technology</h3>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+
+			
+			<!-- Profile -->
+			<div style="display:none" class="data-table profileTable">
+				<div class="title">
+					<ion-icon name="person-circle-outline"></ion-icon>
+					<span class="text">َProfile Details</span>
+				</div>
+				<div>
+					<!-- Username -->
+					<div class="field">
+						<label for="username">Username:</label>
+						<input type="text" id="username" value="userName123" readonly />
+						<button class="edit-btn" onclick="toggleEdit('username')">Edit</button>
+					</div>
+
+					<!-- Phone -->
+					<div class="field">
+						<label for="phone">Phone:</label>
+						<input type="text" id="phone" value="123-456-7890" readonly />
+						<button class="edit-btn" onclick="toggleEdit('phone')">Edit</button>
+					</div>
+
+					
+
+					<!-- Email -->
+					<div class="field">
+						<label for="email">Email:</label>
+						<input type="email" id="email" value="example@email.com" readonly />
+						<button class="edit-btn" onclick="toggleEdit('email')">Edit</button>
+					</div>
+
+					<!-- Password -->
+					<div class="field">
+						<label for="password">Password:</label>
+						<div class="input-container">
+							<input type="password" id="password" value="password123" readonly />
+							<input type="password" id="confirmPassword" value="password123" readonly style="display: none;" />
+							<button class="edit-btn" onclick="togglePasswordEdit()">Edit</button>
+							<button class="show-pass-btn" onmousedown="showPassword()" onmouseup="hidePassword()">Show</button>
+						</div>
+					</div>
+
+					<!-- Photo -->
+					<div class="field">
+						<label for="photo">Profile Picture:</label>
+						<img id="profile-pic" src="default-photo.jpg" alt="Profile Picture" width="100" />
+						<input type="file" id="photo" style="display: none;" onchange="changePhoto()" />
+						<button class="edit-btn" onclick="document.getElementById('photo').click()">Choose Picture</button>
+					</div>
+					
+					<!-- Save Button -->
+					<div class="save-container">
+						<button id="saveButton" class="save-btn" onclick="saveChanges()">Save Changes</button>
+					</div>
+
+					
+				</div>
+			</div>
+
+			
+			<!-- Logout -->
+			<!-- Logout -->
+			
+
+
+
+            
+        </div>
+    </section>
+
+    <script src="../js/AdminAccount.js"></script>
+    
+    <!-- Sources for icons -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    
+</body>
+
+</html>
+
+<script>
+    function fetchTotalViews() {
+        const totalViewsElement = document.getElementById('totalViews');
+
+        fetch('http://localhost:8080/home/allVisits')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch total views');
+                }
+                return response.text(); 
+            })
+            .then(data => {
+                console.log('Server response:', data); 
+                const totalViews = isNaN(data) ? JSON.parse(data).totalViews : data; 
+                totalViewsElement.textContent = totalViews || '0';
+            })
+            .catch(error => {
+                console.error('Error fetching total views:', error);
+                totalViewsElement.textContent = 'Error';
+            });
+    }
+	
+	
+	function fetchTotalPost() {
+        const totalPostElement = document.getElementById('totalPost');
+
+        fetch('http://localhost:8080/home/allNews')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch total views');
+                }
+                return response.text(); 
+            })
+            .then(data => {
+                console.log('Server response:', data); 
+                const totalPost = isNaN(data) ? JSON.parse(data).totalPost : data; 
+                totalPostElement.textContent = totalPost || '0';
+            })
+            .catch(error => {
+                console.error('Error fetching total views:', error);
+                totalPostElement.textContent = 'Error';
+            });
+    }
+	
+	
+	
+
+    fetchTotalViews();
+	fetchTotalPost();
+</script>

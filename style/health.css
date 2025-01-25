@@ -1,0 +1,303 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+.container {
+    width: 85%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    z-index: 10;
+    color: white;
+    padding: 2rem 0;
+    transition: padding 0.3s ease;
+    overflow: hidden;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 34, 49, 0.5);
+    backdrop-filter: blur(70px);
+    z-index: -1;
+    pointer-events: none;
+    mask-image: linear-gradient(to bottom, rgb(0, 0, 0) 0%, rgba(29, 63, 228, 0) 100%);
+}
+
+header .logo {
+    font-size: 1.5rem;
+    margin: 0;
+}
+.logo-text {
+    font-size: 1.5rem; 
+    font-weight: bold; 
+    color: white; 
+    text-decoration: none; 
+    display: inline-block; 
+}
+
+
+header nav {
+    float: right;
+}
+
+header .nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+header .nav-links li {
+    margin: 0 1rem;
+}
+
+header .nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+.hero {
+    background-image: url('../photo/back/sportback1.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    text-align: center;
+    height: 100vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: height 0.3s ease; 
+    margin-top: 0px; 
+}
+
+.hero h2 {
+    font-size: 3rem;
+    transition: font-size 0.3s ease;
+}
+.hero h3 {
+    font-size: 1.5rem;
+    transition: font-size 0.3s ease;
+}
+
+.hero h3:nth-child(n + 3) {
+    display: inline-block;
+    margin: 0 10px; 
+}
+
+
+
+.hero p {
+    font-size: 1.5rem;
+    transition: font-size 0.3s ease;
+	/*color: #77b6ad;*/
+}
+
+
+/*============================== Styles for News Section=========================== */
+.services {
+    padding: 2rem 0;
+    background-color: #f9f9f9;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    position: relative;
+}
+
+.news-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, z-index 0.3s ease, width 0.3s ease, height 0.3s ease;
+}
+
+.news-card:hover {
+    transform: scale(1.02);
+}
+
+body:has(.news-card:focus-within) {
+    overflow: hidden;
+}
+
+/* Adjust positioning of the focused card */
+.news-card:focus-within {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    right: 1rem;
+    margin: 0 auto;
+    z-index: 10;
+    transform: none;
+    width: auto;
+    max-width: 90%;
+    height: auto;
+    max-height: 90vh;
+    overflow: auto;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background: #fff;
+}
+
+/* Hide scrollbar for WebKit browsers (Chrome, Edge, Safari) */
+.news-card:focus-within::-webkit-scrollbar {
+    display: none;
+}
+
+.news-card:focus-within {
+    scrollbar-width: none; 
+	-ms-overflow-style: none;
+}
+
+
+.news-card:focus-within {
+     
+}
+
+
+.news-image {
+    width: 100%; 
+    height: 200px; 
+    display: block;
+}
+.news-card:focus-within .news-image {
+    height: auto; 
+    object-fit: contain; 
+}
+
+
+.news-title {
+    font-size: 1.5rem;
+    margin: 1rem;
+    color: #222;
+}
+
+.news-body {
+    font-size: 1rem;
+    color: #555;
+    margin: 0 1rem 1rem;
+    max-height: 0; 
+    overflow: hidden; 
+    transition: max-height 0.3s ease, opacity 0.3s ease; 
+    opacity: 0; 
+}
+
+.news-card {
+    display: flex;
+    flex-direction: column;
+	text-align: left;
+    align-items: stretch; 
+}
+
+.news-card:hover .news-body {
+    max-height: 50px; 
+    opacity: 1; 
+}
+
+.news-card:focus-within .news-body {
+    max-height: none; 
+    opacity: 1; 
+    overflow: visible; 
+}
+
+
+.news-footer {
+    display: flex;
+    justify-content: space-between;
+	flex-direction: column;/* =========================  remove to make to auther date view normall  =========================*/
+    font-size: 0.9rem;
+    color: #888;
+    margin: 0 1rem 1rem;
+}
+
+
+
+/* Blurring other cards when one is focused */
+.news-grid:has(.news-card:focus-within) .news-card:not(:focus-within) {
+    filter: blur(5px);
+    pointer-events: none; /* Prevent interaction with blurred cards */
+}
+
+
+
+
+
+.gradient {
+    position: absolute;
+    background-image: linear-gradient(0deg, #e90606, transparent);
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+}
+
+.text {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.title {
+    font-size: 24px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.time {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-size: 16px;
+}
+
+.time span {
+    font-size: 14px;
+    color: #ddd;
+}
+
+/* Footer */
+footer {
+    background: #333;
+    color: white;
+    padding: 0.2rem 0; 
+    text-align: center;
+    font-size: 0.7rem;
+}
+

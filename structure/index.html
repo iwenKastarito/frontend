@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="../style/styles.css">
+    <link rel="stylesheet" href="../style/ServiceCard.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="http://use.fontawesome.com/releases/v5.5.0/css/all.css"
+        integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel='stylesheet' href='http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+
+    <script>
+	
+		// Fetch current user
+		fetch('/user/currentUser')
+			.then(response => {
+				if (!response.ok) {
+					return null;
+				}
+				return response.json();
+			})
+			.then(user => {
+				if (user) {
+					document.getElementById('username').innerText = user.username;
+				} else {
+					// No user is logged in === guest view
+					document.getElementById('username').innerText = "Guest";
+				}
+			})
+			.catch(err => {
+				console.error("Error fetching current user:", err);
+				document.getElementById('username').innerText = "Guest";
+			});
+
+		function logout() {
+			fetch('/user/logout', { method: 'POST' })
+				.then(() => {
+					window.location.href = "/Login.html";
+				});
+		}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	
+	
+	
+	
+		window.addEventListener('scroll', function () {
+            let heroSection = document.querySelector('.hero');
+            let scrollPosition = window.scrollY;
+
+            // rescale the he ro
+            let newHeight = Math.max(50, 100 - scrollPosition / 5); // Shrinks from 100vh to 50vh
+            heroSection.style.height = newHeight + "vh"; // Apply the new height
+
+            /////////////////////adjust the font size based on scroll as well
+            let heroText = document.querySelector('.hero h2');
+            let heroDesc = document.querySelector('.hero p');
+			
+			/////////shrink
+
+            if (newHeight < 70) {
+                heroText.style.fontSize = '2rem'; // title size
+                heroDesc.style.fontSize = '1rem'; //description size
+            } else {
+                heroText.style.fontSize = '3rem'; // retun to normal
+                heroDesc.style.fontSize = '1.5rem'; // ^
+            }
+        });
+	
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	
+	
+        // Function to fetch news data and populate the news cards
+        async function loadNews() {
+            try {
+                const response = await fetch('http://localhost:8080/news/number?n=9');
+                const newsData = await response.json();
+
+                const newsGrid = document.querySelector('.news-grid');
+                newsGrid.innerHTML = ''; // Clear existing news cards
+
+                // Loop for the news data and create a card for each
+                newsData.forEach(news => {
+                    const newsCard = document.createElement('div');
+                    newsCard.classList.add('news-card');
+                    newsCard.setAttribute('tabindex', '0');
+
+                    newsCard.innerHTML = `
+                        <img src="${news.photoPath}" class="news-image" alt="News Image">
+                        <h3 class="news-title">${news.title}</h3>
+                        <p class="news-body">${news.content}</p>
+                        <div class="news-footer">
+                            <span>
+                                <img src="../photo/logo/userWhite.png" alt="Author Icon" style="width: 20px; height: 20px; margin-right: 8px;">
+                                ${news.author}
+                            </span>
+                            <span>
+                                <img src="../photo/logo/dateNormal.png" alt="Date Icon" style="width: 20px; height: 20px; margin-right: 8px;">
+                                ${news.date}
+                            </span>
+                            <span>
+                                <img src="../photo/logo/eyeWhite.png" alt="Views Icon" style="width: 20px; height: 20px; margin-right: 8px;">
+                                ${news.viewNumber}
+                            </span>
+                        </div>
+                    `;
+
+                    newsGrid.appendChild(newsCard);
+                });
+            } catch (error) {
+                console.error('Error fetching news:', error);
+            }
+        }
+
+        // Call the function to load the news when the page loads
+        window.onload = loadNews;
+		
+		
+		
+		
+		// URLs for fetching data
+    const urls = {
+        posts: "http://localhost:8080/home/allNews",
+        users: "http://localhost:8080/home/allUsers",
+        visits: "http://localhost:8080/home/allVisits"
+    };
+
+    // Update stats dynamically
+    async function updateStats() {
+        try {
+            // Fetch and update post count
+            const postResponse = await fetch(urls.posts);
+            const postCount = await postResponse.text();
+            document.getElementById("post-count").textContent = `+${postCount}`;
+
+            // Fetch and update user count
+            const userResponse = await fetch(urls.users);
+            const userCount = await userResponse.text();
+            document.getElementById("user-count").textContent = `+${userCount}`;
+
+            // Fetch and update visit count
+            const visitResponse = await fetch(urls.visits);
+            const visitCount = await visitResponse.text();
+            document.getElementById("visit-count").textContent = `+${visitCount}`;
+        } catch (error) {
+            console.error("Error fetching stats:", error);
+        }
+    }
+
+    // Call the update function on page load
+    document.addEventListener("DOMContentLoaded", updateStats);
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <!-- np logo -->
+            <a href="#" class="logo">
+                <span class="logo-text">Bingo</span>
+            </a>
+
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#footer">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="Login.html">User Account</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+		<div class="container">
+			<h2>Above the Wings of Whales</h2>
+			<p style="margin-bottom: 60px;">Where stories take flight, carrying you beyond the surface into the depths of truth</p>
+
+			<div class="stats" style="display: flex; justify-content: center; align-items: center; gap: 150px; margin-top: 20px;">
+				<div class="stat-item" style="text-align: center;">
+					<img id="post-img" src="../photo/logo/postWhite.png" alt="Post logo" style="width: 80px; height: 80px; margin-bottom: 10px; filter: brightness(0) invert(1);">
+					<h3 id="post-count" style="margin: 0; color: white;">Loading...</h3>
+				</div>
+				<div class="stat-item" style="text-align: center;">
+					<img id="user-img" src="../photo/logo/userWhite.png" alt="Reporter logo" style="width: 80px; height: 80px; margin-bottom: 10px; filter: brightness(0) invert(1);">
+					<h3 id="user-count" style="margin: 0; color: white;">Loading...</h3>
+				</div>
+				<div class="stat-item" style="text-align: center;">
+					<img id="visit-img" src="../photo/logo/eyeWhite.png" alt="View logo" style="width: 80px; height: 80px; margin-bottom: 10px; filter: brightness(0) invert(1);">
+					<h3 id="visit-count" style="margin: 0; color: white;">Loading...</h3>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	
+	
+	
+
+
+    <section class="transition"></section>
+    
+    <section id="Favservices" class="Favservices">
+        <div class="container">
+            <h2 class="section-title">Handpicked for you</h2>
+            <div class="news-grid">
+                <!--============================ News cards  ======================-->
+            </div>
+        </div>
+    </section>
+	<section id="services" class="services">
+
+
+		<div class="card-container">
+			<div class="panel active" style="background-image: url('../photo/back/sport3.jpeg')" onclick="openPage('sports.html')">
+				<div class="bottom-box">
+					<div class="icon">
+
+						<i class="fa-solid fa-volleyball" style="color: #74C0FC;"></i>
+
+					</div>
+					<div class="text">
+						<h3>Sport</h3>
+					</div>
+				</div>
+			</div>
+			<div class="panel" style="background-image: url('../photo/back/health6.jpg')" onclick="openPage('health.html')">
+				<div class="bottom-box">
+					<div class="icon">
+
+						<i class="fa-solid fa-heart-pulse" style="color: #FFD43B;"></i>
+
+					</div>
+					<div class="text">
+						<h3>Health</h3>
+					</div>
+				</div>
+			</div>
+			<div class="panel" style="background-image: url('../photo/back/economy8.jpg')" onclick="openPage('economics.html')">
+				<div class="bottom-box">
+					<div class="icon">
+
+						<i class="fa-brands fa-bitcoin" style="color: #B197FC;"></i>
+
+					</div>
+					<div class="text">
+						<h3>Economical</h3>
+					</div>
+				</div>
+			</div>
+			<div class="panel" style="background-image: url('../photo/back/political7.jpg')" onclick="openPage('politics.html')">
+				<div class="bottom-box">
+					<div class="icon">
+
+						<i class="fa-solid fa-landmark" style="color: #191b1f;"></i>
+
+					</div>
+					<div class="text">
+						<h3>Politics</h3>
+					</div>
+				</div>
+			</div>
+			<div class="panel" style="background-image: url('../photo/back/technological5.jpg')" onclick="openPage('technology.html')">
+				<div class="bottom-box">
+					<div class="icon">
+
+						<i class="fa-sharp fa-solid fa-microchip" style="color: #1a57c1;"></i>
+
+					</div>
+					<div class="text">
+						<h3>Technology</h3>
+					</div>
+				</div>
+			</div>
+			<div class="panel" style="background-image: url('../photo/back/military1.jpg')" onclick="pageNotFound('Military')">
+				<div class="bottom-box">
+					<div class="icon">
+
+						<i class="fa-sharp fa-solid fa-jet-fighter" style="color: #f00505;"></i>
+
+					</div>
+					<div class="text">
+						<h3>Military&nbsp(Does&nbspnot&nbspexists)</h3>
+					</div>
+				</div>
+			</div>
+			<div class="panel" style="background-image: url('../photo/back/film1.jpg')" onclick="pageNotFound('Film')">
+				<div class="bottom-box">
+					<div class="icon">
+
+						<i class="fa-solid fa-video" style="color: #63E6BE;"></i>
+
+					</div>
+					<div class="text">
+						<h3>Film&nbsp(Does&nbspnot&nbspexists)</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			function pageNotFound(name){
+				alert(name + " page not created yet")
+			}
+
+			function openPage(name){
+				window.open(name)
+			}
+		</script>
+
+		<script>
+			const panels = document.querySelectorAll('.panel')
+
+			panels.forEach ((panel) => {
+				panel.addEventListener('mouseover' , () =>{
+					removeActiveClasses()
+					panel.classList.add('active')
+				})
+
+			})
+			function removeActiveClasses(){
+				panels.forEach(panel =>{
+					panel.classList.remove('active')
+				})
+
+			}
+		</script>
+
+
+	</section>
+
+
+    <footer id="footer">
+        <div class="container">
+            <p> Made by Kasra and Alireza 🐳</p>
+        </div>
+    </footer>
+</body>
+</html>

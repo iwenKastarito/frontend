@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.card-container{
+    display: flex;
+    /*width: 90vw;*/
+    width: 85%;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: static;
+}
+
+.panel{
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 80vh;
+    border-radius: 50px;
+    color: #fff;
+    cursor: pointer;
+    flex: 0.5;
+    margin: 10px;
+    position: relative;
+    transition: 0.7s ease-in;
+}
+
+@media screen and (max-width: 480px) {
+    .card-container{
+        width: 100vw;
+    }
+    .panel:nth-of-type(4),.panel:nth-of-type(5){
+        display: none;
+    }
+}
+
+.card-container .panel.active .bottom-box{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background: rgba(0,0,0,0.75);
+}
+
+.card-container .panel .bottom-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+}
+
+.card-container .panel .bottom-box .text h3{
+    text-transform: uppercase;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 23px;
+    font-weight: 900;
+}
+
+.card-container .panel .bottom-box .text{
+    position: absolute;
+    left: 90px;
+    opacity: 0;
+    transition: 1s;
+    height: 60px;
+}
+
+.card-container .panel.active .bottom-box .text {
+    opacity: 1;
+    transition: opacity 0.3s ease-in 0.4s;
+    color: #fff;
+}
+
+.card-container .panel .bottom-box .icon{
+    height: 60px;
+    width: 60px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin: 10px;
+    position: relative;
+}
+
+.card-container .panel .bottom-box .icon i{
+    font-size: 20px;
+    color: red;
+    z-index: 2;
+    position: absolute;
+}
+
+.panel h3{
+    font-size: 24px;
+    position: absolute;
+    bottom: 20px;
+    left: 40%;
+    margin:0;
+    opacity: 0;
+}
+
+.panel.active{
+    flex:4;
+}
+
+.panel.active h3 {
+    opacity: 1;
+    transition: opacity 0.3s ease-in 0.4s;
+}
+
+@media (max-width:500px) {
+    .card-container{
+        width: 100vw;
+    }
+    .panel:nth-of-type(4),
+    .panel:nth-of-type(5){
+        display: none;
+    }
+}
